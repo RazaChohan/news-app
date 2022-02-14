@@ -31,9 +31,9 @@ Route::middleware('auth:sanctum')->group(function() {
     /**E
      * News routes
      */
-    Route::get('news', [NewsController::class, 'index']);
-    Route::get('news/{news}', [NewsController::class, 'show']);
-    Route::post('news', [NewsController::class, 'store']);
-    Route::put('news/{news}', [NewsController::class, 'update']);
-    Route::delete('news/{news}', [NewsController::class, 'delete']);
+    Route::get('news', [NewsController::class, 'index'])->name('news-list');
+    Route::get('news/{news}', [NewsController::class, 'show'])->name('news-get');
+    Route::post('news', [NewsController::class, 'store'])->name('news-create');
+    Route::put('news/{news}', [NewsController::class, 'update'])->name('news-update');
+    Route::delete('news/{news}', [NewsController::class, 'delete'])->name('news-delete');
 });
