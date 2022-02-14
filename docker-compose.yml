@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  php:
+    container_name: php-fpm
+    build:
+      context: ./php-fpm
+    ports:
+      - "9000:9001"
+    volumes:
+      - ./application:/var/www/application:cached
+      - ./logs/application:/var/www/application/var/log:cached
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      args:
+        NGINX_SERVER_NAME: news_api.localhost
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    environment:
+      - NGINX_SERVER_NAME=news_api.localhost
+    volumes:
+      - ./logs/nginx:/var/log/nginx:cached
+      - ./application:/var/www/application:cached
